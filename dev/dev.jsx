@@ -7,6 +7,7 @@
 // numberLocalizer()
 
 var React = require('react')
+var ReactDOM = require('react-dom')
 
 var dates = require('../src/util/dates')
 var DropdownList = require('../src/DropdownList.jsx')
@@ -124,7 +125,7 @@ var App = React.createClass({
 
 })
 
-React.render(<App/>, document.body);
+ReactDOM.render(<App/>, document.body);
 
 
 

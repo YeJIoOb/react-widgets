@@ -351,7 +351,7 @@ function getListItem(parent){
       let { disabled, readonly, dataItem } = this.props;
 
       if (!disabled && !readonly)
-        parent.handleChange(dataItem, e.target.checked)
+        parent.handleChange(dataItem, !e.target.checked)
     },
 
     handleMouseDown() {
@@ -370,16 +370,18 @@ function getListItem(parent){
         name = instanceId(parent, '_name')
       } = parent.props;
 
-      let checked = contains(item, parent._values(), parent.props.valueField)
-        , type = multiple ? 'checkbox' : 'radio';
+      let checked = contains(item, parent._values(), parent.props.valueField);
+      let type = multiple ? 'checkbox' : 'radio';
 
       return (
         <ListOption
           {...this.props}
           role={type}
           aria-checked={!!checked}
+          onClick={this.handleChange}
+          handleMouseDown={this.handleMouseDown}
         >
-          <label onMouseDown={this.handleMouseDown}>
+          <label>
             <input
               name={name}
               type={type}
@@ -387,7 +389,6 @@ function getListItem(parent){
               role='presentation'
               checked={checked}
               disabled={disabled || readonly}
-              onChange={this.handleChange}
             />
               { children }
           </label>
